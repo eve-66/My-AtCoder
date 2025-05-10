@@ -28,3 +28,13 @@ for h in range(H):
 #行列Bを出力
 for h in range(H):
     print(*B[h])
+
+    H, W = map(int, input().split())
+
+# X = [list (map(int, input().split())) for _ in range(H)]
+# line = [sum(X[i]) for i in range(H)]
+# column = [sum(X[j][i] for j in range(H)) for i in range(W)]
+# Y = [[line[i] + column[j] - X[i][j] for j in range(W)] for i in range(H)]
+
+# for i in range(H):
+#   print(*Y[i])

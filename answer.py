@@ -1,26 +1,31 @@
-N = int(input())
+H, W = map(int, input().split())
+datas = []
+for h in range(H):
+  data = list(input())
+  datas.append(data)
+print(datas)
 
-plans = []
+passages = []
+walls = []
+exits = []
+for i in range(H):
+  for j in range(W):
+    if datas[i][j] == '.':
+      passages.append([i, j])
+    elif datas[i][j] == '#':
+      walls.append([i, j])
+    else:
+      exits.append([i, j])
 
-for _ in range(N):
-  t, x, y = map(int, input().split())
-  plans.append((t, x, y))
+print (passages)
+print(walls)
+print(exits)
+# passages = [[i, j] ]
+# print(passages)
 
-prev_time, prev_x, prev_y = 0, 0, 0
-
-is_possible = True
-
-for t, x, y in plans:
-  distance = abs(x - prev_x) + abs(y - prev_y)
-  time_difference = t - prev_time
-
-  if distance > time_difference or (time_difference - distance) % 2 != 0:
-    is_possible = False
-    break
-
-  prev_time, prev_x, prev_y = t, x, y
-
-if is_possible:
-  print('Yes')
-else:
-  print('No')
+for passage in passages:
+  bestexit = [1000, 1000]
+  for exit in exits:
+    if (abs(sum(bestexit)-sum(passage)) > abs(sum(exit)-sum(passage))):
+      bestexit = exit
+  print(bestexit)

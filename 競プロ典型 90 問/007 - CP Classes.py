@@ -27,3 +27,32 @@ for _ in range(Q):
         abs2 = abs(A[left+1]-B)
     print(min(abs1, abs2))
 
+
+# N = int(input())
+# A = list(map(int, input().split()))
+# Q = int(input())
+# A.sort()
+
+# for _ in range(Q):
+#   left = 0
+#   right = N - 1
+#   B = int(input())
+
+#   while(right - left > 1):
+#     mid = int((left + right) / 2)
+
+#     if(B <= A[mid]):
+#       right = mid
+#     else:
+#       left = mid
+
+#   l = abs(A[left] - B)
+#   r = abs(A[right] -B)
+
+#   if(l<r):
+#     Dissatisfaction = l
+#   else:
+#     Dissatisfaction = r
+
+#   print(Dissatisfaction)
+
