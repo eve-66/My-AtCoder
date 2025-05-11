@@ -1,31 +1,14 @@
-H, W = map(int, input().split())
-datas = []
-for h in range(H):
-  data = list(input())
-  datas.append(data)
-print(datas)
+N, K = map(int, input().split())
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
 
-passages = []
-walls = []
-exits = []
-for i in range(H):
-  for j in range(W):
-    if datas[i][j] == '.':
-      passages.append([i, j])
-    elif datas[i][j] == '#':
-      walls.append([i, j])
-    else:
-      exits.append([i, j])
+difference = 0
+for n in range(N):
+  difference += abs(A[n] - B[n])
 
-print (passages)
-print(walls)
-print(exits)
-# passages = [[i, j] ]
-# print(passages)
+if K >= difference and (K - difference) % 2 == 0:
+  print('Yes')
+else:
+  print('No')
 
-for passage in passages:
-  bestexit = [1000, 1000]
-  for exit in exits:
-    if (abs(sum(bestexit)-sum(passage)) > abs(sum(exit)-sum(passage))):
-      bestexit = exit
-  print(bestexit)
+
