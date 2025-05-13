@@ -1,14 +1,17 @@
-N, K = map(int, input().split())
-A = list(map(int, input().split()))
-B = list(map(int, input().split()))
+N, M = map(int, input().split())
+vertex = [[] for _ in range(N)] 
 
-difference = 0
+for _ in range(M):
+  a, b = map(int, input().split())
+  vertex[a-1].append(b)
+  vertex[b-1].append(a)
+  # print(vertex)
+
+count = 0
 for n in range(N):
-  difference += abs(A[n] - B[n])
+  # print(vertex[n])
+  small = sum(x < n+1 for x in vertex[n])
+  if small == 1:
+    count += 1
 
-if K >= difference and (K - difference) % 2 == 0:
-  print('Yes')
-else:
-  print('No')
-
-
+print(count)

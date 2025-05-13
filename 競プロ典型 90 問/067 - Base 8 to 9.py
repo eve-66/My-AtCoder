@@ -1,6 +1,6 @@
 def convert(N):
     n = int(N, 8) #Nの10進数表記
-    Nonary = [] #8進数表記格納リスト
+    Nonary = [] #9進数表記格納リスト
 
     while n>=9:
         Nonary.insert(0, n%9) #9で割った余りをリストの先頭に格納
@@ -21,3 +21,31 @@ for _ in range(int(K)):
     N = convert(N)
 
 print(N)
+
+# N, K = map(int, input().split())
+
+# def eight_to_ten(n):
+#   n = str(n)
+#   i = 0
+#   ten_base = 0
+#   for num in reversed(n):
+#     ten_base += int(num) * (8 ** i)
+#     i += 1
+#   return ten_base
+
+# def ten_to_nine(n):
+#   nine_base = ''
+#   while n >= 9:
+#     nine_base = str(n % 9) + nine_base
+#     n //= 9
+#   nine_base = str(n) + nine_base
+#   return nine_base
+
+# answer = N
+# for _ in range(K):
+#   ten_base = eight_to_ten(answer)
+#   nine_base = ten_to_nine(ten_base)
+#   answer = int(nine_base.replace('8', '5'))
+
+# print(answer)
+
