@@ -1,0 +1,12 @@
+N = int(input())
+S = ''
+long = 0
+for _ in range(N):
+    c, l = input().split()
+    long += int(l)
+    if long > 100:
+        print("Too Long")
+        exit()
+    else:
+        S = S + c*int(l)
+print(S)
