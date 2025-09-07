@@ -1,0 +1,10 @@
+S = input()
+world, stage = map(int, S.split('-'))
+
+if stage < 8:
+    stage += 1
+else:
+    stage = 1
+    world += 1
+
+print(f'{world}-{stage}')
