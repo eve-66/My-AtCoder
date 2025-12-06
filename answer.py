@@ -1,44 +1,41 @@
-from collections import Counter
+from collections import deque
 
-N, X, Y = map(int, input().split())
-A = list(map(int, input().split()))
+N, M = map(int, input().split())
+edges = list([] for _ in range(N))
+nodes = [False] * N
+for _ in range(M):
+    x, y = map(int, input().split())
+    edges[x-1].append(y-1)
 
-R_min = [a*X for a in A]
-R_max = [a*Y for a in A]
-gap = Y - X
-# 前提検査
-if min(R_max) < max(R_min):
-    print(-1)
-    exit()
-
-cnt = Counter(R_max)     # 各値の出現回数
-distinct = len(cnt)      # 異なる値の種類数
-
-# 最初だけ A >= 0 を確認
-if not all(a >= 0 for a in A):
-    print(sum(A))
-    exit()
-
-while True:
-    if distinct == 1:    # len(set(R_max)) == 1 と同じ
-        break
+Q = int(input())
+visited = [0] * N
+bfs_id = 0
+for _ in range(Q):
+    query_1, query_2 = map(int, input().split())
+    if query_1 == 1:
+        nodes[query_2 - 1] = True
     else:
-        big_idx, big_val = max(enumerate(R_max), key=lambda x: x[1])
-        old = R_max[big_idx]
-        new = old - gap
-        R_max[big_idx] = new
-        A[big_idx] -= 1
-        if A[big_idx] < 0:
-            break
-        # Counter 更新（old 減少 & new 増加）
-        cnt[old] -= 1
-        if cnt[old] == 0:
-            del cnt[old]
-            distinct -= 1
+        bfs_id += 1
+        start = query_2 - 1
+        node_queue = deque([start])
+        flag = False
+        visited[start] = bfs_id
 
-        cnt[new] += 1
-        if cnt[new] == 1:
-            distinct += 1
+        while node_queue and not flag:
+            node = node_queue.popleft()
+            if nodes[node]:
+                print("Yes")
+                flag = True
+                break
+            for to in edges[node]:
+                if  visited[to] == bfs_id:
+                    continue
+                visited[to] = bfs_id
+                if nodes[to]:
+                    print("Yes")
+                    flag = True
+                    break
+                node_queue.append(to)
+        if not flag:
+            print("No")
 
-ans = sum(A)
-print(ans)
